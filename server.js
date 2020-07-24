@@ -46,8 +46,8 @@ app.get("/about", function (req, res) {
       return console.log(err);
     }
 
-    data = data.replace(/{{title}}/g, "Contact | Sachin Verma");
-    data = data.replace(/{{description}}/g, "Contact Sachin Verma");
+    data = data.replace(/{{title}}/, "Contact | Sachin Verma");
+    data = data.replace(/{{description}}/, "Contact Sachin Verma");
 
     res.send(data);
   });
@@ -57,7 +57,19 @@ app.use(express.static(path.resolve(__dirname, "./public")));
 
 app.get("*", function (req, res) {
   const filePath = path.resolve(__dirname, "./public", "index.html");
-  res.sendFile(filePath);
+  fs.readFile(filePath, "utf8", function (err, data) {
+    if (err) {
+      return console.log(err);
+    }
+
+    data = data.replace(/{{title}}/, "Sachin Verma");
+    data = data.replace(
+      /{{description}}/,
+      "Sachin Verma's personal site and blog"
+    );
+
+    res.send(data);
+  });
 });
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
