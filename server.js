@@ -38,7 +38,7 @@ app.get("/about", function (req, res) {
   });
 });
 
-app.get("/about", function (req, res) {
+app.get("/contact", function (req, res) {
   const filePath = path.resolve(__dirname, "./public", "index.html");
 
   fs.readFile(filePath, "utf8", function (err, data) {
